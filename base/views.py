@@ -42,7 +42,8 @@ def homeView(request):
 def confirmView(request):
     staff_id = request.GET.get('staff_id')
     context = {
-        'staff_id' : staff_id
+        'staff_id' : staff_id,
+        'vehicle_id': 'WWT2306'
     }
 
     return render(request, 'base/confirm.html', context)
@@ -53,4 +54,4 @@ def successView(request):
 
     }
 
-    return render(request, 'base/home.html', context)
+    return render(request, 'base/success.html', context)

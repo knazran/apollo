@@ -1,26 +1,41 @@
-{% extends "index.html" %}
-
-{% block main_content %}
+{% extends "index.html" %} {% block main_content %}
 <div class="flex m-auto justify-center self-center">
-    <div class=" bg-white rounded-lg border-gray-500 border shadow-md px-8 pt-6 pb-8">
-       
-        <h3 class="text-center text-2xl font-bold mb-4">Confirm Your Details</h3>
-        <!-- <div class="form-group"> -->
-            <div class="mb-4">
-                <label class="block text-gray-700 text-md font-bold mb-2" for="staff_id">
-                    Staff ID
-                </label>
-                <p class="mb-6 text-gray-700">{{ staff_id }}
-            </div>
-        <!-- </div> -->
-       
-        <div class="flex items-center mt-12">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center w-full">Confirm Check In</button>
-        </div>
-        {% if form.errors %}
-        <p class="leading-tight text-red-500 my-4">Your username and password didn't match. Please try again.</p>
-        {% endif %}
+  <div
+    class=" bg-white w-full rounded-lg border-gray-500 border shadow-md mx-6 px-8 pt-6 pb-6"
+  >
+    <h3 class="text-center text-2xl font-bold mb-4">Confirm Your Details</h3>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-md font-bold mb-2" for="staff_id">
+        Staff ID
+      </label>
+      <p class="mb-6 text-gray-700">{{ staff_id }}</p>
     </div>
+    <div class="mb-4">
+        <label class="block text-gray-700 text-md font-bold mb-2" for="staff_id">
+          Vehicle Number
+        </label>
+        <p class="mb-6 text-gray-700">{{ vehicle_id }}</p>
+      </div>
 
+    <a href="{% url 'success' %}" class="w-full">
+      <div class="flex items-center mt-6 w-full">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline text-center w-full"
+        >
+          Confirm Check In
+        </button>
+      </div>
+    </a>
+
+    <a href="{% url 'success' %}" class="w-full">
+        <div class="flex items-center mt-2 w-full">
+          <button
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline text-center w-full"
+          >
+            Go Back
+          </button>
+        </div>
+      </a>
+  </div>
 </div>
 {% endblock %}

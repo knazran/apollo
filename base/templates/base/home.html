@@ -2,7 +2,7 @@
 
 {% block main_content %}
 <div class="flex m-auto justify-center self-center">
-    <form class="form-signin bg-white rounded-lg border-gray-500 border shadow-md px-8 pt-6 pb-8"
+    <form class="form-signin bg-white rounded-lg border-gray-500 border shadow-md mx-6 px-8 pt-6 pb-8"
         role="form" method="post" action="/base/home">
         <!-- action="/base/home" -->
         {% csrf_token %}
@@ -22,8 +22,8 @@
             </div>
         </div>
        
-        <div class="flex items-center mt-12">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center w-full" type="submit">Sign in</button>
+        <div class="flex items-center mt-8">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center w-full" type="submit">Check in</button>
         </div>
         {% if form.errors %}
         <p class="leading-tight text-red-500 my-4">Your username and password didn't match. Please try again.</p>
