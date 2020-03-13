@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <title>Apollo</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tailwind.min.css' %}">
+    <script type="text/javascript" src="{% static  'js/jquery.min.js' %}"></script>
+
+</head>
+
+<body>
+    <!-- <div class="flex"> -->
+        <!-- Main section -->
+        <div class="flex w-full h-screen bg-gray-300">
+
+            {% block main_content %}
+            {% endblock %}
+        </div>
+
+    <!-- </div> -->
+
+
+</body>
+
+</html>

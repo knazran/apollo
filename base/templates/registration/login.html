@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <title>Panoptes</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tailwind.min.css' %}">
+</head>
+
+<body>
+    <div class="flex justify-center bg-gray-300 h-screen py-48">
+        <form class="form-signin w-1/4 bg-white rounded-lg border-gray-500 border shadow-md px-8 pt-6 h-auto pb-8 mb-4"
+            role="form" method="post" action="/base/login/">
+            {% csrf_token %}
+            <h3 class="form-signin-heading text-center text-2xl font-bold mb-1">Codename: Panoptes</h3>
+            <p class="text-gray-700 font-italic text-sm mb-6 text-center px-2">
+                The spiritual successor to Social Monitoring System (SOMS). Named after Argos Panoptes, the many-eyed giant in Greek mythology
+            </p>
+            <div class="form-group">
+                <div class="input-group mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                        Username
+                    </label>
+                    <input type="email"
+                        class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        name="{{ form.username.html_name }}" id="{{ form.username.id_for_label }}" placeholder="Email"
+                        autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                        Password
+                    </label>
+                    <input type="password" class="form-control shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
+                    name="{{ form.password.html_name }}"
+                        id="{{ form.password.id_for_label }}" placeholder="{{ form.password.html_name | title }}"
+                        autocomplete="off" />
+                </div>
+            </div>
+           
+            <div class="flex items-center">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center w-full" type="submit">Sign in</button>
+            </div>
+            {% if form.errors %}
+            <p class="leading-tight text-red-500 my-4">Your username and password didn't match. Please try again.</p>
+            {% endif %}
+        </form>
+
+
+    </div>
+</body>
+
+</html>
