@@ -16,9 +16,13 @@
     
     </lottie-player>
     <h3 class="text-center text-2xl font-bold mb-1">Checked in</h3>
+    {% load tz %}
+
+    {% localtime on %}
     <p class="text-gray-900 text-md mb-12 text-center px-2 mb-4">
-        You checked in at <strong>8.37am</strong> on shuttle number <strong>WWT2306</strong>
+        You checked in at <strong>{{boarding_time.time}}</strong> on shuttle number <strong>WWT2306</strong>
       </p>
+      {% endlocaltime %}
     <p class="text-gray-700 font-italic text-sm mb-6 text-center px-2">
       Thank you for your cooperation. Let's contain and beat this virus together
     </p>

@@ -8,6 +8,7 @@ import dateutil.parser
 from .forms import ShuttleCheckInForm
 from urllib.parse import urlencode
 from django.utils import timezone
+import datetime
 
 def homeView(request):
     iter_range = [0, 1, 2, 3, 4, 5]
@@ -25,10 +26,10 @@ def homeView(request):
             shuttle_checkIn = form.save(commit=False)
             print(shuttle_checkIn.staff_id)
             shuttle_checkIn.vehicle_id = "WWT2306"
-            shuttle_checkIn.boarding_time = timezone.now()
+            shuttle_checkIn.boarding_time = datetime.datetime.now()
             shuttle_checkIn.save()
             print(shuttle_checkIn)
-            staff_id_params = urlencode({'staff_id': shuttle_checkIn.staff_id})
+            staff_id_params = urlencode({'vehicle_id': shuttle_checkIn.vehicle_id})
             return HttpResponseRedirect('success?{}'.format(staff_id_params))
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -51,9 +52,12 @@ def confirmView(request):
     return render(request, 'base/confirm.html', context)
 
 def successView(request):
-
+    vehicle_id = request.GET.get('vehicle_id')
+    boarding_time = datetime.datetime.now()
+    print(boarding_time)
     context = {
-
+        'boarding_time' : boarding_time,
+        'vehicle_id': vehicle_id
     }
 
     return render(request, 'base/success.html', context)
