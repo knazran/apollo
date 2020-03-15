@@ -1,119 +1,180 @@
-{% extends "index.html" %}
+{% extends "index.html" %} {% block main_content %}
+<div class="flex m-auto justify-center ">
+  <div
+    class="rounded-lg border-gray-500 border shadow-md bg-white mx-6 px-8 pt-6 pb-8"
+  >
+    <form
+      class="form-signin "
+      role="form"
+      method="post"
+      action="/base/home"
+      id="staff_form"
+    >
+      <!-- action="/base/home" -->
+      {% csrf_token %}
+      <h3 class="form-signin-heading text-center text-2xl font-bold mb-1">
+        BNM Shuttle Sign-In Form
+      </h3>
+      <p class="text-gray-700 font-italic text-sm mb-6 text-center px-2">
+        Due to Covid-19, we require all passengers of BNM Shuttle to sign-in
+      </p>
+      <div class="form-group">
+        <div class="input-group mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="staff_id"
+          >
+            Staff ID
+          </label>
+          <input
+            type="text"
+            class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            name="{{ form.staff_id.html_name }}"
+            id="{{ form.staff_id.id_for_label }}"
+            placeholder="Staff ID"
+            autocomplete="off"
+          />
+        </div>
+      </div>
 
-{% block main_content %}
-<div class="flex m-auto justify-center self-center">
-    <form class="form-signin bg-white rounded-lg border-gray-500 border shadow-md mx-6 px-8 pt-6 pb-8"
-        role="form" method="post" action="/base/home">
-        <!-- action="/base/home" -->
-        {% csrf_token %}
-        <h3 class="form-signin-heading text-center text-2xl font-bold mb-1">Codename: Apollo</h3>
-        <p class="text-gray-700 font-italic text-sm mb-6 text-center px-2">
-           Due to Covid-19, we require all passengers of BNM Shuttle to sign-in 
-        </p>
-        <div class="form-group">
-            <div class="input-group mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="staff_id">
-                    Staff ID
-                </label>
-                <input type="text"
-                    class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    name="{{ form.staff_id.html_name }}" id="{{ form.staff_id.id_for_label }}" placeholder="Staff ID"
-                    autocomplete="off" />
-            </div>
-        </div>
-       
-        <div class="flex items-center mt-8">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center w-full" type="submit">Check in</button>
-        </div>
-        {% if form.errors %}
-        <p class="leading-tight text-red-500 my-4">Your username and password didn't match. Please try again.</p>
-        {% endif %}
+      {% if form.errors %}
+      <p class="leading-tight text-red-500 my-4">
+        Incorrect Format for Staff ID
+      </p>
+      {% endif %}
     </form>
-    <!-- <div class="flex items-center mt-12">
-        <button class="modal-open bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center w-full" type="submit">Sign in</button>
-    </div> -->
-
+    <div class="flex items-center mt-8">
+      <button
+        class="modal-open bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-center w-full"
+        type="submit"
+      >
+        Sign in
+      </button>
+    </div>
+  </div>
 </div>
 <!-- Modal -->
-<div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
-    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+<div
+  class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"
+>
+  <div
+    class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"
+  ></div>
 
-    <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+  <div
+    class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto"
+  >
+    <!-- Add margin if you want to see some of the overlay behind the modal-->
+    <div class="modal-content py-4 text-left px-6">
+      <!--Title-->
+      <div class="flex justify-between items-center pb-3">
+        <p class="text-2xl font-bold">Confirm Your Details</p>
 
-        <!-- Add margin if you want to see some of the overlay behind the modal-->
-        <div class="modal-content py-4 text-left px-6">
-            <!--Title-->
-            <div class="flex justify-between items-center pb-3">
-                <p class="text-2xl font-bold">Confirm Your Details</p>
-
-                <!-- CLose Pointer -->
-                <div class="modal-close cursor-pointer z-50">
-                    <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                        viewBox="0 0 18 18">
-                        <path
-                            d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
-                        </path>
-                    </svg>
-                </div>
-            </div>
-
-            <!--Body-->
-            <p class="mb-6">This operation is <strong>irreversible</strong>. Are you sure you want to delete this topic?
-            </p>
-
-            <!--Footer-->
-            <!-- <form method="post" id="delete" name="delete" action="{% url 'home' %}">
-                {% csrf_token %}
-                <input hidden type="text" id="object_to_delete_id" /> -->
-                <button 
-                    class="modal-close w-full px-4 bg-red-600 p-2 rounded-lg text-white hover:bg-red-800">
-                    I am sure. Delete this topic.
-                </button>
-            <!-- </form> -->
+        <!-- CLose Pointer -->
+        <div class="modal-close cursor-pointer z-50">
+          <svg
+            class="fill-current text-black"
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+          >
+            <path
+              d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+            ></path>
+          </svg>
         </div>
+      </div>
+
+      <!--Body-->
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-md font-bold mb-2"
+          for="staff_id"
+        >
+          Staff ID
+        </label>
+        <p id="staff_id" class="mb-6 text-gray-700"></p>
+      </div>
+
+      <!--Footer-->
+      <!-- action="{% url 'success' %} -->
+      <!-- <form method="post" id="delete" name="delete" ">
+            {% csrf_token %}
+            <input hidden type="text" id="object_to_delete_id" /> -->
+      <div class="flex">
+        <div class="w-1/2">
+          <button
+            class="modal-close w-full bg-red-600 p-2 mr-2 rounded-lg text-white hover:bg-red-800"
+          >
+            Go Back
+          </button>
+        </div>
+        <div class="w-1/2">
+          <button
+            class="modal-submit w-full bg-blue-600 p-2 ml-2 rounded-lg text-white hover:bg-blue-800"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+
+      <!-- </form> -->
     </div>
+  </div>
 </div>
 
 <!-- Modal logic -->
 <script>
-    var openmodal = document.querySelectorAll('.modal-open')
-    for (var i = 0; i < openmodal.length; i++) {
-        openmodal[i].addEventListener('click', function (event) {
-            event.preventDefault()
-            toggleModal()
-        })
+  var openmodal = document.querySelectorAll(".modal-open");
+  for (var i = 0; i < openmodal.length; i++) {
+    openmodal[i].addEventListener("click", function(event) {
+      event.preventDefault();
+      toggleModal();
+    });
+  }
+
+  const overlay = document.querySelector(".modal-overlay");
+  overlay.addEventListener("click", toggleModal);
+
+  var closemodal = document.querySelectorAll(".modal-close");
+  for (var i = 0; i < closemodal.length; i++) {
+    closemodal[i].addEventListener("click", function(event) {
+      toggleModal();
+    });
+  }
+
+  var submitForm = document.querySelectorAll(".modal-submit");
+  for (var i = 0; i < submitForm.length; i++) {
+    submitForm[i].addEventListener("click", function(event) {
+      form_data = $("form").serializeArray();
+      console.log(form_data);
+      $("#staff_form").submit();
+      toggleModal();
+    });
+  }
+
+  document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    var isEscape = false;
+    if ("key" in evt) {
+      isEscape = evt.key === "Escape" || evt.key === "Esc";
+    } else {
+      isEscape = evt.keyCode === 27;
     }
-
-    const overlay = document.querySelector('.modal-overlay')
-    overlay.addEventListener('click', toggleModal)
-
-    var closemodal = document.querySelectorAll('.modal-close')
-    for (var i = 0; i < closemodal.length; i++) {
-        closemodal[i].addEventListener('click', toggleModal)
+    if (isEscape && document.body.classList.contains("modal-active")) {
+      toggleModal();
     }
+  };
 
-    document.onkeydown = function (evt) {
-        evt = evt || window.event
-        var isEscape = false
-        if ("key" in evt) {
-            isEscape = (evt.key === "Escape" || evt.key === "Esc")
-        } else {
-            isEscape = (evt.keyCode === 27)
-        }
-        if (isEscape && document.body.classList.contains('modal-active')) {
-            toggleModal()
-        }
-    };
+  function toggleModal() {
+    const body = document.querySelector("body");
+    const modal = document.querySelector(".modal");
+    modal.classList.toggle("opacity-0");
+    modal.classList.toggle("pointer-events-none");
+    body.classList.toggle("modal-active");
 
-
-    function toggleModal() {
-        const body = document.querySelector('body')
-        const modal = document.querySelector('.modal')
-        modal.classList.toggle('opacity-0')
-        modal.classList.toggle('pointer-events-none')
-        body.classList.toggle('modal-active')
-    }
-
-
+    $("#staff_id").text($("#id_staff_id").val());
+  }
 </script>
 {% endblock %}

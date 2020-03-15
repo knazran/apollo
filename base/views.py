@@ -7,6 +7,7 @@ from django.db import IntegrityError, transaction
 import dateutil.parser
 from .forms import ShuttleCheckInForm
 from urllib.parse import urlencode
+from django.utils import timezone
 
 def homeView(request):
     iter_range = [0, 1, 2, 3, 4, 5]
@@ -23,11 +24,12 @@ def homeView(request):
             # redirect to a new URL:
             shuttle_checkIn = form.save(commit=False)
             print(shuttle_checkIn.staff_id)
-            # shuttle_checkIn.vehicle_id = "WWT2306"
-            # shuttle_checkIn.save()
-            # print(form.cleaned_data['staff_id'])
+            shuttle_checkIn.vehicle_id = "WWT2306"
+            shuttle_checkIn.boarding_time = timezone.now()
+            shuttle_checkIn.save()
+            print(shuttle_checkIn)
             staff_id_params = urlencode({'staff_id': shuttle_checkIn.staff_id})
-            return HttpResponseRedirect('confirm?{}'.format(staff_id_params))
+            return HttpResponseRedirect('success?{}'.format(staff_id_params))
     # if a GET (or any other method) we'll create a blank form
     else:
         form = ShuttleCheckInForm()

@@ -69,7 +69,7 @@ class CustomUser(AbstractBaseUser):
 
 class ShuttleCheckIn(models.Model):
     vehicle_id = models.CharField(max_length=10)
-    boarding_time = models.DateField(auto_now_add=True)
+    boarding_time = models.DateTimeField()
     staff_id = models.CharField(max_length=7)
 
     def __str__(self):
