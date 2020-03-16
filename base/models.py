@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+from django.core import validators
 import uuid
 import json
 
@@ -68,7 +69,7 @@ class CustomUser(AbstractBaseUser):
         return self.is_admin
 
 class ShuttleCheckIn(models.Model):
-    vehicle_id = models.CharField(max_length=10)
+    vehicle_id = models.CharField(max_length=10, validators=[validators.MinLengthValidator(7)])
     boarding_time = models.DateTimeField()
     staff_id = models.CharField(max_length=7)
 

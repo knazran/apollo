@@ -37,7 +37,7 @@
         </div>
       </div>
 
-      {% if form.errors %}
+      {% if form.errors and submitted == True%}
       <p class="leading-tight text-red-500 my-4">
         Incorrect Format for Staff ID
       </p>

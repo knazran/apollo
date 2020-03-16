@@ -11,7 +11,6 @@ from django.utils import timezone
 import datetime
 
 def homeView(request):
-    iter_range = [0, 1, 2, 3, 4, 5]
 
     
     # if this is a POST request we need to process the form data
@@ -31,12 +30,19 @@ def homeView(request):
             print(shuttle_checkIn)
             staff_id_params = urlencode({'vehicle_id': shuttle_checkIn.vehicle_id})
             return HttpResponseRedirect('success?{}'.format(staff_id_params))
+        else:
+            print(form.errors)
+            context = {
+                'form' : form,
+                'submitted':True
+            }
+            return render(request, 'base/home.html', context)
+
     # if a GET (or any other method) we'll create a blank form
     else:
         form = ShuttleCheckInForm()
 
     context = {
-        'range' : iter_range,
         'form' : ShuttleCheckInForm
     }
 
